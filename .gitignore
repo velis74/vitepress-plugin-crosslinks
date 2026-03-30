@@ -1,0 +1,8 @@
+/.idea
+/.claude
+/coverage
+/node_modules
+/dist
+/package-lock.json
+/docs/.vitepress/cache
+/docs/.vitepress/dist

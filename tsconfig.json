@@ -1,0 +1,25 @@
+{
+  "extends": "./node_modules/eslint-config-velis/tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./node_modules/*"]
+    },
+    "types": ["vitest/globals"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/index.ts",
+    "src/types.ts",
+    "src/env-loader.ts",
+    "src/env-loader.spec.ts",
+    "src/markdown-plugin.ts",
+    "src/markdown-plugin.spec.ts"
+  ],
+  "exclude": [
+    "dist",
+    "coverage",
+    "node_modules"
+  ]
+}
