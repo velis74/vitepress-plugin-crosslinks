@@ -50,6 +50,7 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
+      reporter: ['text', 'json-summary'],
       include: [
         'src/index.ts',
         'src/types.ts',

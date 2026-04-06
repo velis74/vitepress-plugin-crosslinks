@@ -10,17 +10,17 @@ import type { CrosslinksConfig } from './types';
  *
  * @example
  * // .vitepress/config.ts
- * import { markdownConfig } from 'vitepress-plugin-crosslinks';
+ * import { crosslinksConfig } from 'vitepress-plugin-crosslinks';
  *
  * export default defineConfig({
  *   markdown: {
- *     config: markdownConfig({
+ *     config: crosslinksConfig({
  *       projects: { 'my-docs': 'http://localhost:3001' },
  *     }),
  *   },
  * });
  */
-export function markdownConfig(config: CrosslinksConfig = {}): (md: MarkdownIt) => void {
+export function crosslinksConfig(config: CrosslinksConfig = {}): (md: MarkdownIt) => void {
   const projects = resolveProjects(config);
   return (md: MarkdownIt) => md.use(crosslinksMarkdownPlugin, projects);
 }

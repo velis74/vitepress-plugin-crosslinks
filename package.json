@@ -1,7 +1,7 @@
 {
   "name": "vitepress-plugin-crosslinks",
   "private": false,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "VitePress plugin for resolving cross-project documentation links at build time",
   "author": "Jure Erznožnik",

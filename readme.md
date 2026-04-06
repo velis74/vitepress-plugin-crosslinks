@@ -20,11 +20,11 @@ npm install vitepress-plugin-crosslinks
 ```typescript
 // .vitepress/config.ts
 import { defineConfig } from 'vitepress';
-import { markdownConfig } from 'vitepress-plugin-crosslinks';
+import { crosslinksConfig } from 'vitepress-plugin-crosslinks';
 
 export default defineConfig({
   markdown: {
-    config: markdownConfig({
+    config: crosslinksConfig({
       projects: {
         'my-docs': 'https://my-docs.example.com',
         'api-ref': 'https://api.example.com',
@@ -76,7 +76,7 @@ the config and override them per-environment:
 
 ```typescript
 // .vitepress/config.ts
-markdownConfig({
+crosslinksConfig({
   projects: {
     'my_docs': 'http://localhost:3001',  // dev default
     'api_ref': 'http://localhost:3002',  // dev default
@@ -95,7 +95,7 @@ Projects discovered from env vars that are not listed in `projects` config are a
 ### Custom prefix
 
 ```typescript
-markdownConfig({
+crosslinksConfig({
   envPrefix: 'DOCS_URL_',  // looks for DOCS_URL_* instead of CROSSLINKS_BASE_*
   projects: { /* ... */ },
 })
@@ -103,12 +103,12 @@ markdownConfig({
 
 ## API
 
-### `markdownConfig(config?)`
+### `crosslinksConfig(config?)`
 
 Returns a `(md: MarkdownIt) => void` function suitable for VitePress `markdown.config`.
 
 ```typescript
-import { markdownConfig } from 'vitepress-plugin-crosslinks';
+import { crosslinksConfig } from 'vitepress-plugin-crosslinks';
 ```
 
 ### `resolveProjects(config)`
