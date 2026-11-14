@@ -1,5 +1,4 @@
 /// <reference types="vitest" />
-import { readdirSync, readFileSync } from 'fs';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import eslint from 'vite-plugin-eslint';
@@ -22,11 +21,10 @@ export default defineConfig({
       exclude: ['**/*.spec.ts'],
       // fails the build when the generated declarations import a type by a node_modules path,
       // which does not resolve in a consumer's installation
-      afterBuild: () => {
-        const dist = resolve(__dirname, 'dist');
-        const paths = readdirSync(dist, { recursive: true, encoding: 'utf-8' })
-          .filter((file) => file.endsWith('.d.ts'))
-          .flatMap((file) => readFileSync(resolve(dist, file), 'utf-8').match(/(?:from |import\()['"][^'"]*node_modules[^'"]*['"]/g) ?? []);
+      afterBuild: (emittedFiles) => {
+        const paths = [...emittedFiles]
+          .filter(([file]) => /\.d\.[cm]?ts$/.test(file))
+          .flatMap(([, content]) => content.match(/(?:from |import\(|require\()['"][^'"]*node_modules[^'"]*['"]/g) ?? []);
         if (paths.length) throw new Error(`declarations import from node_modules paths: ${paths.join(', ')}`);
       },
     }),
