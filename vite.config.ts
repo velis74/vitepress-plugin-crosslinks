@@ -19,6 +19,14 @@ export default defineConfig({
     dts({
       rollupTypes: true,
       exclude: ['**/*.spec.ts'],
+      // fails the build when the generated declarations import a type by a node_modules path,
+      // which does not resolve in a consumer's installation
+      afterBuild: (emittedFiles) => {
+        const paths = [...emittedFiles]
+          .filter(([file]) => /\.d\.[cm]?ts$/.test(file))
+          .flatMap(([, content]) => content.match(/(?:from |import\(|require\()['"][^'"]*node_modules[^'"]*['"]/g) ?? []);
+        if (paths.length) throw new Error(`declarations import from node_modules paths: ${paths.join(', ')}`);
+      },
     }),
     visualizer({
       open: false,
