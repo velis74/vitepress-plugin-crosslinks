@@ -26,6 +26,7 @@ jobs:
   all-green:
     if: always()
     needs: [test]
+    permissions: {}
     runs-on: ubuntu-latest
     steps:
       - if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
